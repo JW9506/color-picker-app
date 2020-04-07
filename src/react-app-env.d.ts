@@ -1,6 +1,6 @@
 /// <reference types="react-scripts" />
 
 declare module "*.scss" {
-  const src: string;
-  export default src;
+  const src: string
+  export default src
 }
