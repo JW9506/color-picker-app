@@ -1,7 +1,13 @@
 import React from "react"
+import Palette from "components/Palette"
+import seedColors from "seedColors"
 
 const App: React.FC = () => {
-  return <div>Hello</div>
+  return (
+    <div>
+      <Palette {...seedColors[4]} />
+    </div>
+  )
 }
 
 export default App
