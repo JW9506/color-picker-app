@@ -1,8 +1,19 @@
 import React from "react"
+import "./index.scss"
 
-class ColorBox extends React.Component {
+interface Props {
+  background: string
+  name: string
+}
+
+class ColorBox extends React.Component<Props> {
   render() {
-    return <div className="ColorBox">ColorBox</div>
+    const { background, name } = this.props
+    return (
+      <div className="ColorBox" style={{ background }}>
+        <span>{name}</span>
+      </div>
+    )
   }
 }
 
