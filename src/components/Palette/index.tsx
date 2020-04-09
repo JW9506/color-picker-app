@@ -1,18 +1,37 @@
 import React from "react"
 import "./index.scss"
 import ColorBox from "components/ColorBox"
-import { PaletteShape } from "seedColors"
+import Slider from "rc-slider"
+import "rc-slider/assets/index.css"
+import { ExpandedPalette } from "utils/colorHelper"
 
-type Props = PaletteShape
+type Props = ExpandedPalette
+interface State {
+  level: number
+}
 
-class Palette extends React.Component<Props> {
+class Palette extends React.Component<Props, State> {
+  state: State = {
+    level: 500,
+  }
+  changeLevel = (level: number) => {
+    this.setState({ level })
+  }
   render() {
     const { colors } = this.props
-    const colorBoxes = colors.map((c) => (
-      <ColorBox key={c.color} background={c.color} name={c.name} />
+    const { level } = this.state
+    const colorBoxes = colors[level].map((color) => (
+      <ColorBox key={color.hex} background={color.hex} name={color.name} />
     ))
     return (
       <div className="Palette">
+        <Slider
+          defaultValue={level}
+          min={100}
+          max={900}
+          step={100}
+          onAfterChange={this.changeLevel}
+        />
         {/* Navbar goes here */}
         <div className="Palette-colors">{colorBoxes}</div>
         {/* bunch of color boxes */}
