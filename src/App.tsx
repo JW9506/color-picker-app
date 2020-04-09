@@ -12,7 +12,13 @@ function findPalette(id: string) {
 const App: React.FC = () => {
   return (
     <Switch>
-      <Route exact path="/" render={() => <PaletteList />} />
+      <Route
+        exact
+        path="/"
+        render={(routeProps: RouteChildrenProps<{ id: string }>) => (
+          <PaletteList {...routeProps} />
+        )}
+      />
       <Route
         exact
         path="/palette/:id"

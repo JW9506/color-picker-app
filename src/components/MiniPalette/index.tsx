@@ -49,11 +49,12 @@ interface OwnProps {
   name: string
   emoji: string
   colors: PaletteShape["colors"]
+  handleClick: () => void
 }
 
 type Props = WithStyles<typeof styles> & OwnProps
 
-const MiniPalette: React.FC<Props> = ({ classes, name, emoji, colors }) => {
+const MiniPalette: React.FC<Props> = ({ classes, name, emoji, colors, handleClick }) => {
   const miniColorBoxes = colors.map((c) => (
     <div
       key={c.name}
@@ -62,7 +63,7 @@ const MiniPalette: React.FC<Props> = ({ classes, name, emoji, colors }) => {
     ></div>
   ))
   return (
-    <div className={classes.root}>
+    <div className={classes.root} onClick={handleClick}>
       <div className={classes.colors}>{miniColorBoxes}</div>
       <h5 className={classes.title}>
         {name} <span className={classes.emoji}>{emoji}</span>
