@@ -4,13 +4,20 @@ import { ExpandedPalette } from "utils/colorHelper"
 import ColorBox from "components/ColorBox"
 import Navbar from "components/Navbar"
 import PaletteFooter from "components/PaletteFooter"
+import { Link } from "react-router-dom"
 
 interface OwnProps {
   colorId: string
 }
 type Props = ExpandedPalette & OwnProps
 
-const SingleColorPalette: React.FC<Props> = ({ palette, colors, colorId, emoji }) => {
+const SingleColorPalette: React.FC<Props> = ({
+  palette,
+  id,
+  colors,
+  colorId,
+  emoji,
+}) => {
   const [state, setState] = useState<{ format: FormatType }>({ format: "hex" })
   const changeFormat = (value: FormatType) => {
     setState({ format: value })
@@ -24,11 +31,17 @@ const SingleColorPalette: React.FC<Props> = ({ palette, colors, colorId, emoji }
       id={color.id}
     />
   ))
-  console.log(_shades)
   return (
-    <div className="Palette">
+    <div className="SingleColorPalette Palette">
       <Navbar handleChange={changeFormat} />
-      <div className="Palette-colors">{colorBoxes}</div>
+      <div className="Palette-colors">
+        {colorBoxes}
+        <div className="go-back ColorBox">
+          <Link className="back-button" to={`/palette/${id}`}>
+            Go Back
+          </Link>
+        </div>
+      </div>
       <PaletteFooter palette={palette} emoji={emoji} />
     </div>
   )
