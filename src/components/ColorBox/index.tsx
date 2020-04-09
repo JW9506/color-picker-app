@@ -7,6 +7,8 @@ import { Link } from "react-router-dom"
 interface Props {
   background: string
   name: string
+  id: string
+  paletteId?: string
 }
 
 interface State {
@@ -25,7 +27,7 @@ class ColorBox extends React.Component<Props, State> {
     })
   }
   render() {
-    const { background, name } = this.props
+    const { background, name, id, paletteId } = this.props
     const { copied } = this.state
     return (
       <CopyToClipboard text={background} onCopy={this.changeCopyState}>
@@ -44,9 +46,14 @@ class ColorBox extends React.Component<Props, State> {
             </div>
             <button className="copy-button">Copy</button>
           </div>
-          <Link to="/" onClick={(e) => e.stopPropagation()}>
-            <span className="see-more">More</span>
-          </Link>
+          {paletteId && (
+            <Link
+              to={`/palette/${paletteId}/${id}`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <span className="see-more">More</span>
+            </Link>
+          )}
         </div>
       </CopyToClipboard>
     )

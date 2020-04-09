@@ -4,6 +4,7 @@ import Palette from "components/Palette"
 import seedColors from "seedColors"
 import generatePalette from "utils/colorHelper"
 import PaletteList from "components/PaletteList"
+import SingleCOlorPalette from "components/SingleColorPalette"
 
 function findPalette(id: string) {
   return seedColors.find((palette) => palette.id === id) || seedColors[0]
@@ -31,7 +32,16 @@ const App: React.FC = () => {
       <Route
         exact
         path="/palette/:paletteId/:colorId"
-        render={() => <h1>zxcv</h1>}
+        render={(
+          routeProps: RouteChildrenProps<{ paletteId: string; colorId: string }>
+        ) => (
+          <SingleCOlorPalette
+            colorId={routeProps.match!.params.colorId}
+            {...generatePalette(
+              findPalette(routeProps.match!.params.paletteId)
+            )}
+          />
+        )}
       />
     </Switch>
   )
