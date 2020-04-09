@@ -6,7 +6,7 @@ import MiniPalette from "components/MiniPalette"
 const styles = createStyles({
   root: {
     backgroundColor: "blue",
-    height: "100%",
+    height: "100vh",
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
@@ -50,6 +50,7 @@ class PaletteList extends React.Component<Props> {
                 key={Math.random()}
                 name={p.paletteName}
                 emoji={p.emoji}
+                colors={p.colors}
               />
             ))}
           </div>
