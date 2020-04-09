@@ -3,11 +3,21 @@ import { PaletteShape } from "seedColors"
 
 const levels = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900]
 
+interface ExpandedColor {
+  name: string
+  id: string
+  hex: string
+  rgb: string
+  rgba: string
+}
+
+export type FormatType = "hex" | "rgb" | "rgba"
+
 export interface ExpandedPalette {
   palette: string
   id: string
   emoji: string
-  colors: { [level: number]: { [field: string]: string }[] }
+  colors: { [level: number]: ExpandedColor[] }
 }
 
 export default function generatePalette(starterPalette: PaletteShape) {

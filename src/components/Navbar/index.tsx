@@ -3,6 +3,7 @@ import "./index.scss"
 import Slider from "rc-slider"
 import "rc-slider/assets/index.css"
 import Select, { SelectProps } from "@material-ui/core/Select"
+import { FormatType } from "utils/colorHelper"
 import MenuItem from "@material-ui/core/MenuItem"
 import Snackbar from "@material-ui/core/Snackbar"
 import CloseIcon from "@material-ui/icons/Close"
@@ -12,10 +13,10 @@ import { Link } from "react-router-dom"
 interface Props {
   level: number
   changeLevel: (level: number) => void
-  handleChange: (value: string) => void
+  handleChange: (value: FormatType) => void
 }
 interface State {
-  format: string
+  format: FormatType
   open: boolean
 }
 class Navbar extends React.Component<Props, State> {
@@ -26,7 +27,7 @@ class Navbar extends React.Component<Props, State> {
   handleSelectChange: SelectProps["onChange"] = (e) => {
     this.setState(
       (s) => ({
-        format: e.target.value as string,
+        format: e.target.value as FormatType,
         open: !s.open,
       }),
       () => {

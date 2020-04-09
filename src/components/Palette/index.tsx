@@ -1,13 +1,13 @@
 import React from "react"
 import "./index.scss"
 import ColorBox from "components/ColorBox"
-import { ExpandedPalette } from "utils/colorHelper"
+import { ExpandedPalette, FormatType } from "utils/colorHelper"
 import Navbar from "components/Navbar"
 
 type Props = ExpandedPalette
 interface State {
   level: number
-  format: string
+  format: FormatType
 }
 
 class Palette extends React.Component<Props, State> {
@@ -18,17 +18,19 @@ class Palette extends React.Component<Props, State> {
   changeLevel = (level: number) => {
     this.setState({ level })
   }
-  changeFormat = (value: string) => {
+  changeFormat = (value: FormatType) => {
     this.setState({ format: value })
   }
   render() {
-    const { colors, palette, emoji } = this.props
+    const { colors, palette, emoji, id } = this.props
     const { level, format } = this.state
     const colorBoxes = colors[level].map((color) => (
       <ColorBox
         key={color.id}
         background={color[format]}
         name={color[format]}
+        id={color.id}
+        paletteId={id}
       />
     ))
     return (
