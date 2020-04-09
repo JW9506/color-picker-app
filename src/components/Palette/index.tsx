@@ -29,7 +29,7 @@ class Palette extends React.Component<Props, State> {
       <ColorBox
         key={color.id}
         background={color[format]}
-        name={color[format]}
+        name={color.name}
         id={color.id}
         paletteId={id}
       />

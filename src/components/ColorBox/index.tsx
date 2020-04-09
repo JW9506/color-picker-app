@@ -3,6 +3,7 @@ import CopyToClipboard from "react-copy-to-clipboard"
 import clsx from "clsx"
 import "./index.scss"
 import { Link } from "react-router-dom"
+import chroma from "chroma-js"
 
 interface Props {
   background: string
@@ -29,6 +30,8 @@ class ColorBox extends React.Component<Props, State> {
   render() {
     const { background, name, id, paletteId } = this.props
     const { copied } = this.state
+    const isDarkColor = chroma(background).luminance() <= 0.08
+    const isLightColor = chroma(background).luminance() >= 0.5
     return (
       <CopyToClipboard text={background} onCopy={this.changeCopyState}>
         <div className="ColorBox" style={{ background }}>
@@ -36,22 +39,39 @@ class ColorBox extends React.Component<Props, State> {
             className={clsx("copy-overlay", copied && "show")}
             style={{ background }}
           />
-          <div className={clsx("copy-msg", copied && "show")}>
+          <div
+            className={clsx(
+              "copy-msg",
+              copied && "show",
+              isDarkColor && "light-text",
+              isLightColor && "dark-text"
+            )}
+          >
             <h1>copied!</h1>
             <p>{background}</p>
           </div>
           <div className="copy-container">
-            <div className="box-content">
+            <div className={clsx("box-content", isDarkColor && "light-text")}>
               <span>{name}</span>
             </div>
-            <button className="copy-button">Copy</button>
+            <button
+              className={clsx(
+                "copy-button",
+                isDarkColor && "light-text",
+                isLightColor && "dark-text"
+              )}
+            >
+              Copy
+            </button>
           </div>
           {paletteId && (
             <Link
               to={`/palette/${paletteId}/${id}`}
               onClick={(e) => e.stopPropagation()}
             >
-              <span className="see-more">More</span>
+              <span className={clsx("see-more", isLightColor && "dark-text")}>
+                More
+              </span>
             </Link>
           )}
         </div>

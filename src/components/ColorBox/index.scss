@@ -90,6 +90,12 @@
       padding: 10px;
     }
   }
+  .light-text {
+    color: white !important;
+  }
+  .dark-text {
+    color: black !important;
+  }
   .see-more {
     background: rgba(255, 255, 255, 0.3);
     position: absolute;
@@ -113,7 +119,7 @@
     .back-button {
       text-decoration: none;
       text-align: center;
-      color: inherit;
+      color: white;
     }
   }
 }
