@@ -7,6 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem"
 import Snackbar from "@material-ui/core/Snackbar"
 import CloseIcon from "@material-ui/icons/Close"
 import IconButton from "@material-ui/core/IconButton"
+import { Link } from "react-router-dom"
 
 interface Props {
   level: number
@@ -44,7 +45,7 @@ class Navbar extends React.Component<Props, State> {
     return (
       <header className="Navbar">
         <div className="logo">
-          <a href="#">reactcolorpicker</a>
+          <Link to="/">reactcolorpicker</Link>
         </div>
         <div className="slider-container">
           <span>Level: {level}</span>
