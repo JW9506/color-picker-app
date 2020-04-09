@@ -1,18 +1,25 @@
-import React from "react"
+import React, { useState } from "react"
+import { FormatType } from "utils/colorHelper"
 import { ExpandedPalette } from "utils/colorHelper"
 import ColorBox from "components/ColorBox"
+import Navbar from "components/Navbar"
+import PaletteFooter from "components/PaletteFooter"
 
 interface OwnProps {
   colorId: string
 }
 type Props = ExpandedPalette & OwnProps
 
-const SingleColorPalette: React.FC<Props> = ({ colors, colorId }) => {
+const SingleColorPalette: React.FC<Props> = ({ palette, colors, colorId, emoji }) => {
+  const [state, setState] = useState<{ format: FormatType }>({ format: "hex" })
+  const changeFormat = (value: FormatType) => {
+    setState({ format: value })
+  }
   const _shades = gatherShades(colors, colorId)
   const colorBoxes = _shades.map((color) => (
     <ColorBox
       key={color.hex}
-      background={color.hex}
+      background={color[state.format]}
       name={color.name}
       id={color.id}
     />
@@ -20,8 +27,9 @@ const SingleColorPalette: React.FC<Props> = ({ colors, colorId }) => {
   console.log(_shades)
   return (
     <div className="Palette">
-      <h1>Single Color P</h1>
+      <Navbar handleChange={changeFormat} />
       <div className="Palette-colors">{colorBoxes}</div>
+      <PaletteFooter palette={palette} emoji={emoji} />
     </div>
   )
 }

@@ -3,6 +3,7 @@ import "./index.scss"
 import ColorBox from "components/ColorBox"
 import { ExpandedPalette, FormatType } from "utils/colorHelper"
 import Navbar from "components/Navbar"
+import PaletteFooter from "components/PaletteFooter"
 
 type Props = ExpandedPalette
 interface State {
@@ -41,10 +42,7 @@ class Palette extends React.Component<Props, State> {
           handleChange={this.changeFormat}
         />
         <div className="Palette-colors">{colorBoxes}</div>
-        <footer className="pallette-footer">
-          {palette}
-          <span className="emoji">{emoji}</span>
-        </footer>
+        <PaletteFooter palette={palette} emoji={emoji} />
       </div>
     )
   }

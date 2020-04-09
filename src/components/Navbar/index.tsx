@@ -11,8 +11,8 @@ import IconButton from "@material-ui/core/IconButton"
 import { Link } from "react-router-dom"
 
 interface Props {
-  level: number
-  changeLevel: (level: number) => void
+  level?: number
+  changeLevel?: (level: number) => void
   handleChange: (value: FormatType) => void
 }
 interface State {
@@ -48,18 +48,21 @@ class Navbar extends React.Component<Props, State> {
         <div className="logo">
           <Link to="/">reactcolorpicker</Link>
         </div>
-        <div className="slider-container">
-          <span>Level: {level}</span>
-          <div className="slider">
-            <Slider
-              defaultValue={level}
-              min={100}
-              max={900}
-              step={100}
-              onAfterChange={changeLevel}
-            />
+        {level && changeLevel && (
+          <div className="slider-container">
+            <span>Level: {level}</span>
+            <div className="slider">
+              <Slider
+                defaultValue={level}
+                min={100}
+                max={900}
+                step={100}
+                onAfterChange={changeLevel}
+              />
+            </div>
           </div>
-        </div>
+        )}
+
         <div className="select-container">
           <Select value={format} onChange={this.handleSelectChange}>
             <MenuItem value="hex">HEX - #ffffff</MenuItem>
