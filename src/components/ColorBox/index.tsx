@@ -2,6 +2,7 @@ import React from "react"
 import CopyToClipboard from "react-copy-to-clipboard"
 import clsx from "clsx"
 import "./index.scss"
+import { Link } from "react-router-dom"
 
 interface Props {
   background: string
@@ -43,7 +44,9 @@ class ColorBox extends React.Component<Props, State> {
             </div>
             <button className="copy-button">Copy</button>
           </div>
-          <span className="see-more">More</span>
+          <Link to="/" onClick={(e) => e.stopPropagation()}>
+            <span className="see-more">More</span>
+          </Link>
         </div>
       </CopyToClipboard>
     )
