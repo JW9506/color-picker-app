@@ -5,6 +5,7 @@ import seedColors from "seedColors"
 import generatePalette from "utils/colorHelper"
 import PaletteList from "components/PaletteList"
 import SingleCOlorPalette from "components/SingleColorPalette"
+import NewPaletteForm from "components/NewPaletteForm"
 
 function findPalette(id: string) {
   return seedColors.find((palette) => palette.id === id) || seedColors[0]
@@ -20,6 +21,7 @@ const App: React.FC = () => {
           <PaletteList {...routeProps} />
         )}
       />
+      <Route exact path="/palette/new" render={() => <NewPaletteForm />} />
       <Route
         exact
         path="/palette/:id"
