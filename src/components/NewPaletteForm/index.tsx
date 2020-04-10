@@ -155,6 +155,13 @@ class NewPaletteForm extends React.Component<Props, State> {
     this.props.history.push("/")
   }
 
+  handleDelete = (colorName: string) => {
+    this.setState((s) => ({
+      ...s,
+      colors: this.state.colors.filter((c) => c.name !== colorName),
+    }))
+  }
+
   componentDidMount() {
     ValidatorForm.addValidationRule("colorNameUnique", (name: string) => {
       if (
@@ -173,7 +180,11 @@ class NewPaletteForm extends React.Component<Props, State> {
     ValidatorForm.addValidationRule(
       "paletteNameUnique",
       (paletteName: string) => {
-        if (this.props.palettes.every((p) => p.paletteName.toLowerCase() !== paletteName.toLowerCase()))
+        if (
+          this.props.palettes.every(
+            (p) => p.paletteName.toLowerCase() !== paletteName.toLowerCase()
+          )
+        )
           return true
         return false
       }
@@ -294,6 +305,7 @@ class NewPaletteForm extends React.Component<Props, State> {
               key={Math.random()}
               name={c.name}
               color={c.color}
+              handleDelete={() => this.handleDelete(c.name)}
             />
           ))}
         </main>
