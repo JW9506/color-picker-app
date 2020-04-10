@@ -1,6 +1,6 @@
 import React from "react"
 import { RouteChildrenProps, Link } from "react-router-dom"
-import { default as palettes } from "seedColors"
+import { PaletteShape } from "seedColors"
 import { createStyles, withStyles, WithStyles } from "@material-ui/styles"
 import MiniPalette from "components/MiniPalette"
 
@@ -39,14 +39,18 @@ const styles = createStyles({
   },
 })
 
-type Props = WithStyles<typeof styles> & RouteChildrenProps
+interface OwnProps {
+  palettes: PaletteShape[]
+}
+
+type Props = WithStyles<typeof styles> & RouteChildrenProps & OwnProps
 
 class PaletteList extends React.Component<Props> {
   goToPalette = (id: string) => {
     this.props.history.push(`/palette/${id}`)
   }
   render() {
-    const { classes } = this.props
+    const { classes, palettes } = this.props
     return (
       <div className={classes.root}>
         <div className={classes.container}>
