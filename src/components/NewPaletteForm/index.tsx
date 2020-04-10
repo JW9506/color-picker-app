@@ -15,21 +15,11 @@ import IconButton from "@material-ui/core/IconButton"
 import MenuIcon from "@material-ui/icons/Menu"
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
 import ChevronRightIcon from "@material-ui/icons/ChevronRight"
-import List from "@material-ui/core/List"
-import ListItem from "@material-ui/core/ListItem"
-import ListItemIcon from "@material-ui/core/ListItemIcon"
-import ListItemText from "@material-ui/core/ListItemText"
-import InboxIcon from "@material-ui/icons/MoveToInbox"
-import MailIcon from "@material-ui/icons/Mail"
 import clsx from "clsx"
-import { ChromePicker, ChromePickerProps } from "react-color"
+import { ChromePicker, ColorChangeHandler } from "react-color"
 import Button from "@material-ui/core/Button"
 
 interface OwnProps {}
-
-interface State {
-  open: boolean
-}
 
 const drawerWidth = 400
 const styles = (theme: Theme) =>
@@ -94,9 +84,17 @@ const styles = (theme: Theme) =>
 
 type Props = WithStyles<typeof styles, true> & OwnProps
 
+interface State {
+  open: boolean
+  currentColor: string
+  colors: string[]
+}
+
 class NewPaletteForm extends React.Component<Props, State> {
   state: State = {
     open: false,
+    currentColor: "teal",
+    colors: ["purple", "#157641"],
   }
 
   handleDrawerOpen = () => {
@@ -107,9 +105,19 @@ class NewPaletteForm extends React.Component<Props, State> {
     this.setState({ open: false })
   }
 
+  updateCurrentColor: ColorChangeHandler = (result) => {
+    this.setState({ currentColor: result.hex })
+  }
+
+  addNewColor = () => {
+    this.setState((s) => ({
+      colors: [...s.colors, s.currentColor],
+    }))
+  }
+
   render() {
     const { classes, theme } = this.props
-    const { open } = this.state
+    const { open, currentColor, colors } = this.state
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -152,29 +160,6 @@ class NewPaletteForm extends React.Component<Props, State> {
               )}
             </IconButton>
           </div>
-          {/*
-          <List>
-            {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {["All mail", "Trash", "Spam"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-          */}
           <Divider />
           <Typography variant="h4">Design your palette</Typography>
           <div>
@@ -186,10 +171,15 @@ class NewPaletteForm extends React.Component<Props, State> {
             </Button>
           </div>
           <ChromePicker
-            color="purple"
-            onChangeComplete={(newColor) => console.log(newColor)}
+            color={currentColor}
+            onChangeComplete={this.updateCurrentColor}
           />
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ backgroundColor: currentColor }}
+            onClick={this.addNewColor}
+          >
             Add Color
           </Button>
         </Drawer>
@@ -199,6 +189,13 @@ class NewPaletteForm extends React.Component<Props, State> {
           })}
         >
           <div className={classes.drawerHeader} />
+          <ul>
+            {colors.map((c) => (
+              <li key={Math.random()} style={{ backgroundColor: c }}>
+                {c}
+              </li>
+            ))}
+          </ul>
         </main>
       </div>
     )
