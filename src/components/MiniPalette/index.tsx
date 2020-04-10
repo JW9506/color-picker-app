@@ -15,7 +15,7 @@ const styles = createStyles({
     },
   },
   colors: {
-    backgroundColor: "grey",
+    backgroundColor: "white",
     height: "150px",
     width: "100%",
     borderRadius: "5px",

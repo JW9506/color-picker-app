@@ -1,4 +1,5 @@
 import React from "react"
+import { RouteComponentProps } from "react-router-dom"
 import {
   Theme,
   createStyles,
@@ -20,6 +21,7 @@ import { ChromePicker, ColorChangeHandler } from "react-color"
 import Button from "@material-ui/core/Button"
 import DraggableColorBox from "components/DraggableColorBox"
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator"
+import { PaletteShape } from "seedColors"
 
 const drawerWidth = 400
 const styles = (theme: Theme) =>
@@ -82,9 +84,11 @@ const styles = (theme: Theme) =>
     },
   })
 
-interface OwnProps {}
+interface OwnProps {
+  savePalette: (newPalette: PaletteShape) => void
+}
 
-type Props = WithStyles<typeof styles, true> & OwnProps
+type Props = WithStyles<typeof styles, true> & RouteComponentProps & OwnProps
 
 interface State {
   open: boolean
@@ -130,6 +134,18 @@ class NewPaletteForm extends React.Component<Props, State> {
     this.setState({ newName: e.target.value })
   }
 
+  savePalette = () => {
+    const newName = "New Test Palette"
+    const newPalette: PaletteShape = {
+      paletteName: newName,
+      id: newName.toLowerCase().replace(/ /g, "-"),
+      emoji: "",
+      colors: this.state.colors,
+    }
+    this.props.savePalette(newPalette)
+    this.props.history.push("/")
+  }
+
   componentDidMount() {
     ValidatorForm.addValidationRule("isColorNameUnique", (name: string) => {
       if (
@@ -155,6 +171,7 @@ class NewPaletteForm extends React.Component<Props, State> {
         <CssBaseline />
         <AppBar
           position="fixed"
+          color="default"
           className={clsx(classes.appBar, {
             [classes.appBarShift]: open,
           })}
@@ -172,6 +189,13 @@ class NewPaletteForm extends React.Component<Props, State> {
             <Typography variant="h6" noWrap>
               Persistent drawer
             </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.savePalette}
+            >
+              Save Palette
+            </Button>
           </Toolbar>
         </AppBar>
         <Drawer
