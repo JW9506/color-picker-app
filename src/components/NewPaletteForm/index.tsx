@@ -18,6 +18,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight"
 import clsx from "clsx"
 import { ChromePicker, ColorChangeHandler } from "react-color"
 import Button from "@material-ui/core/Button"
+import DraggableColorBox from "components/DraggableColorBox"
 
 interface OwnProps {}
 
@@ -189,13 +190,9 @@ class NewPaletteForm extends React.Component<Props, State> {
           })}
         >
           <div className={classes.drawerHeader} />
-          <ul>
-            {colors.map((c) => (
-              <li key={Math.random()} style={{ backgroundColor: c }}>
-                {c}
-              </li>
-            ))}
-          </ul>
+          {colors.map((c) => (
+            <DraggableColorBox key={Math.random()} color={c} />
+          ))}
         </main>
       </div>
     )
