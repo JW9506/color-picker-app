@@ -19,9 +19,11 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight"
 import clsx from "clsx"
 import { ChromePicker, ColorChangeHandler } from "react-color"
 import Button from "@material-ui/core/Button"
-import DraggableColorBox from "components/DraggableColorBox"
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator"
 import { PaletteShape } from "seedColors"
+import DraggableColorList from "components/DraggableColorList"
+import { SortEndHandler, SortEventWithTag, SortEvent } from "react-sortable-hoc"
+import arrayMove from "array-move"
 
 const drawerWidth = 400
 const styles = (theme: Theme) =>
@@ -91,11 +93,16 @@ interface OwnProps {
 
 type Props = WithStyles<typeof styles, true> & RouteComponentProps & OwnProps
 
+export interface NewColor {
+  color: string
+  name: string
+}
+
 interface State {
   open: boolean
   currentColor: string
   newColorName: string
-  colors: { color: string; name: string }[]
+  colors: NewColor[]
   newPaletteName: string
 }
 
@@ -159,6 +166,18 @@ class NewPaletteForm extends React.Component<Props, State> {
     this.setState((s) => ({
       ...s,
       colors: this.state.colors.filter((c) => c.name !== colorName),
+    }))
+  }
+
+  shouldCancelStart = (e: SortEvent | SortEventWithTag) => {
+    if ("tagName" in e.target)
+      return e.target.tagName === "path" || e.target.tagName === "svg"
+    return false
+  }
+
+  onSortEnd: SortEndHandler = ({ oldIndex, newIndex }) => {
+    this.setState(({ colors }) => ({
+      colors: arrayMove(colors, oldIndex, newIndex),
     }))
   }
 
@@ -300,14 +319,13 @@ class NewPaletteForm extends React.Component<Props, State> {
           })}
         >
           <div className={classes.drawerHeader} />
-          {colors.map((c) => (
-            <DraggableColorBox
-              key={Math.random()}
-              name={c.name}
-              color={c.color}
-              handleDelete={() => this.handleDelete(c.name)}
-            />
-          ))}
+          <DraggableColorList
+            colors={colors}
+            handleDelete={this.handleDelete}
+            axis="xy"
+            shouldCancelStart={this.shouldCancelStart}
+            onSortEnd={this.onSortEnd}
+          />
         </main>
       </div>
     )
