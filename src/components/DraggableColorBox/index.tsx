@@ -14,15 +14,16 @@ const styles = createStyles({
 })
 
 interface OwnProps {
+  name: string
   color: string
 }
 
 type Props = WithStyles<typeof styles> & OwnProps
 
-const DraggableColorBox: React.FC<Props> = ({ color, classes }) => {
+const DraggableColorBox: React.FC<Props> = ({ color, classes, name }) => {
   return (
     <div className={classes.root} style={{ backgroundColor: color }}>
-      {color}
+      {name} - {color}
     </div>
   )
 }
