@@ -22,6 +22,8 @@ import ListItemText from "@material-ui/core/ListItemText"
 import InboxIcon from "@material-ui/icons/MoveToInbox"
 import MailIcon from "@material-ui/icons/Mail"
 import clsx from "clsx"
+import { ChromePicker, ChromePickerProps } from "react-color"
+import Button from "@material-ui/core/Button"
 
 interface OwnProps {}
 
@@ -29,7 +31,7 @@ interface State {
   open: boolean
 }
 
-const drawerWidth = 240
+const drawerWidth = 400
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -150,7 +152,6 @@ class NewPaletteForm extends React.Component<Props, State> {
               )}
             </IconButton>
           </div>
-          <Divider />
           {/*
           <List>
             {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
@@ -174,6 +175,23 @@ class NewPaletteForm extends React.Component<Props, State> {
             ))}
           </List>
           */}
+          <Divider />
+          <Typography variant="h4">Design your palette</Typography>
+          <div>
+            <Button variant="contained" color="secondary">
+              Clear Palette
+            </Button>
+            <Button variant="contained" color="primary">
+              Random Color
+            </Button>
+          </div>
+          <ChromePicker
+            color="purple"
+            onChangeComplete={(newColor) => console.log(newColor)}
+          />
+          <Button variant="contained" color="primary">
+            Add Color
+          </Button>
         </Drawer>
         <main
           className={clsx(classes.content, {
