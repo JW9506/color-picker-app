@@ -3,6 +3,7 @@ import { RouteChildrenProps, Link } from "react-router-dom"
 import { PaletteShape } from "seedColors"
 import { createStyles, withStyles, WithStyles } from "@material-ui/styles"
 import MiniPalette from "components/MiniPalette"
+import { querySizeDown } from "utils/styleMediaQuery"
 
 const styles = createStyles({
   root: {
@@ -13,11 +14,20 @@ const styles = createStyles({
     justifyContent: "center",
   },
   container: {
-    width: "50%",
+    width: "60%",
     display: "flex",
     alignItems: "flex-start",
     flexDirection: "column",
     flexWrap: "wrap",
+    [querySizeDown("lg")]: {
+      width: "80%",
+    },
+    [querySizeDown("md")]: {
+      width: "90%",
+    },
+    [querySizeDown("xs")]: {
+      width: "70%",
+    },
   },
   nav: {
     display: "flex",
@@ -35,7 +45,15 @@ const styles = createStyles({
     width: "100%",
     display: "grid",
     gridTemplateColumns: "repeat(3, 30%)",
-    gridGap: "5%",
+    gridGap: "5rem",
+    [querySizeDown("md")]: {
+      gridTemplateColumns: "repeat(2, 50%)",
+      gridGap: "1rem 1rem",
+    },
+    [querySizeDown("xs")]: {
+      gridTemplateColumns: "repeat(1, 100%)",
+      gridGap: "1rem",
+    },
   },
 })
 
