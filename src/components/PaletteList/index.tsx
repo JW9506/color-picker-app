@@ -4,14 +4,18 @@ import { PaletteShape } from "seedColors"
 import { createStyles, withStyles, WithStyles } from "@material-ui/styles"
 import MiniPalette from "components/MiniPalette"
 import { querySizeDown } from "utils/styleMediaQuery"
+import bg from "utils/bg.svg"
 
 const styles = createStyles({
   root: {
-    backgroundColor: "blue",
+    backgroundColor: "#5f77aa",
+    backgroundImage: `url(${bg})`,
+    /* background by SVGBackgrounds.com */
     height: "100vh",
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
+    overflow: "scroll",
   },
   container: {
     width: "60%",
@@ -32,6 +36,7 @@ const styles = createStyles({
   nav: {
     display: "flex",
     width: "100%",
+    lineHeight: "4rem",
     justifyContent: "space-between",
     color: "white",
     alignItems: "center",
