@@ -66,7 +66,7 @@ export interface NewColor {
 interface OwnProps {
   open: boolean
   handleDrawerOpen: () => void
-  savePalette: (e: React.FormEvent, newPaletteName: string) => void
+  savePalette: (newPaletteName: string, emoji: string) => void
   palettes: PaletteShape[]
 }
 

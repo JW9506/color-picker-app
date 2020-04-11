@@ -97,7 +97,7 @@ class ColorPickerForm extends React.Component<Props, State> {
           <TextValidator
             name="newColorName"
             className={classes.colorNameInput}
-            placeholder="Color Name"
+            label="Color Name"
             variant="filled"
             margin="normal"
             value={newColorName}

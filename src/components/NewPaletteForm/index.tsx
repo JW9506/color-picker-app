@@ -45,7 +45,6 @@ const styles = (theme: Theme) =>
     },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3),
       height: "calc(100vh - 64px)",
       transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.sharp,
@@ -122,12 +121,11 @@ class NewPaletteForm extends React.Component<Props, State> {
     }))
   }
 
-  savePalette = (e: React.FormEvent, newPaletteName: string) => {
-    e.preventDefault()
+  savePalette = (newPaletteName: string, emoji: string) => {
     const newPalette: PaletteShape = {
       paletteName: newPaletteName,
       id: newPaletteName.toLowerCase().replace(/ /g, "-"),
-      emoji: "",
+      emoji,
       colors: this.state.colors,
     }
     this.props.savePalette(newPalette)
