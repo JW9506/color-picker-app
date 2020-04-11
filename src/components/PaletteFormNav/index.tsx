@@ -30,6 +30,7 @@ const styles = (theme: Theme) =>
       }),
       flexDirection: "row",
       justifyContent: "space-between",
+      alignItems: "center",
       height: 64,
     },
     appBarShift: {
@@ -46,7 +47,15 @@ const styles = (theme: Theme) =>
     hide: {
       display: "none",
     },
-    navBtns: {},
+    navBtns: {
+      marginRight: "1rem",
+      "& a": {
+        textDecoration: "none",
+      },
+    },
+    button: {
+      margin: "0 0.5rem",
+    },
   })
 
 export interface NewColor {
@@ -63,7 +72,21 @@ interface OwnProps {
 
 type Props = WithStyles<typeof styles, true> & OwnProps
 
-class PaletteFormNav extends React.Component<Props> {
+interface State {
+  formShowing: boolean
+}
+
+class PaletteFormNav extends React.Component<Props, State> {
+  state: State = {
+    formShowing: false,
+  }
+
+  handlePaletteNameDialog = () => {
+    this.setState((s) => ({
+      formShowing: !s.formShowing,
+    }))
+  }
+
   render() {
     const {
       classes,
@@ -97,14 +120,28 @@ class PaletteFormNav extends React.Component<Props> {
             </Typography>
           </Toolbar>
           <div className={classes.navBtns}>
-            <PaletteMetaForm palettes={palettes} savePalette={savePalette} />
-            <Link to="/">
+            <Link to="/" className={classes.button}>
               <Button variant="contained" color="secondary">
                 Go Back
               </Button>
             </Link>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.handlePaletteNameDialog}
+              className={classes.button}
+            >
+              Save
+            </Button>
           </div>
         </AppBar>
+        {this.state.formShowing && (
+          <PaletteMetaForm
+            palettes={palettes}
+            savePalette={savePalette}
+            handlePaletteNameDialog={this.handlePaletteNameDialog}
+          />
+        )}
       </div>
     )
   }
