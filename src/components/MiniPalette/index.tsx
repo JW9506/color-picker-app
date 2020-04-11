@@ -1,6 +1,7 @@
 import React from "react"
 import { PaletteShape } from "seedColors"
 import { createStyles, withStyles, WithStyles } from "@material-ui/styles"
+import DeleteIcon from "@material-ui/icons/Delete"
 
 const styles = createStyles({
   root: {
@@ -10,8 +11,9 @@ const styles = createStyles({
     padding: "0.5rem",
     position: "relative",
     overflow: "hidden",
-    "&:hover": {
-      cursor: "pointer",
+    cursor: "pointer",
+    "&:hover svg": {
+      opacity: 1,
     },
   },
   colors: {
@@ -43,6 +45,19 @@ const styles = createStyles({
     position: "relative",
     marginBottom: "-3.5px",
   },
+  deleteIcon: {
+    color: "white",
+    backgroundColor: "#eb3d30",
+    width: 20,
+    height: 20,
+    position: "absolute",
+    right: 0,
+    top: 0,
+    padding: 1,
+    zIndex: 10,
+    opacity: 0,
+    transition: "all 0.3s ease-in-out",
+  },
 })
 
 interface OwnProps {
@@ -54,7 +69,13 @@ interface OwnProps {
 
 type Props = WithStyles<typeof styles> & OwnProps
 
-const MiniPalette: React.FC<Props> = ({ classes, name, emoji, colors, handleClick }) => {
+const MiniPalette: React.FC<Props> = ({
+  classes,
+  name,
+  emoji,
+  colors,
+  handleClick,
+}) => {
   const miniColorBoxes = colors.map((c) => (
     <div
       key={c.name}
@@ -64,6 +85,7 @@ const MiniPalette: React.FC<Props> = ({ classes, name, emoji, colors, handleClic
   ))
   return (
     <div className={classes.root} onClick={handleClick}>
+      <DeleteIcon className={classes.deleteIcon} />
       <div className={classes.colors}>{miniColorBoxes}</div>
       <h5 className={classes.title}>
         {name} <span className={classes.emoji}>{emoji}</span>
