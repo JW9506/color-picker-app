@@ -28,6 +28,9 @@ const styles = (theme: Theme) =>
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
+      flexDirection: "row",
+      justifyContent: "space-between",
+      height: 64,
     },
     appBarShift: {
       width: `calc(100% - ${drawerWidth}px)`,
@@ -43,6 +46,7 @@ const styles = (theme: Theme) =>
     hide: {
       display: "none",
     },
+    navBtns: {},
   })
 
 export interface NewColor {
@@ -95,7 +99,7 @@ class PaletteFormNav extends React.Component<Props, State> {
     const { classes, handleDrawerOpen, savePalette, open } = this.props
     const { newPaletteName } = this.state
     return (
-      <>
+      <div className={classes.root}>
         <CssBaseline />
         <AppBar
           position="fixed"
@@ -115,14 +119,17 @@ class PaletteFormNav extends React.Component<Props, State> {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-              Persistent drawer
+              Create a Palette
             </Typography>
+          </Toolbar>
+          <div className={classes.navBtns}>
             <ValidatorForm
               onSubmit={(e) => savePalette(e, this.state.newPaletteName)}
             >
               <TextValidator
                 name="newPaletteName"
                 value={newPaletteName}
+                placeholder="Palette Name"
                 onChange={this.handleChange}
                 validators={["required", "paletteNameUnique"]}
                 errorMessages={[
@@ -133,15 +140,15 @@ class PaletteFormNav extends React.Component<Props, State> {
               <Button variant="contained" color="primary" type="submit">
                 Save Palette
               </Button>
-              <Link to="/">
-                <Button variant="contained" color="secondary">
-                  Go Back
-                </Button>
-              </Link>
             </ValidatorForm>
-          </Toolbar>
+            <Link to="/">
+              <Button variant="contained" color="secondary">
+                Go Back
+              </Button>
+            </Link>
+          </div>
         </AppBar>
-      </>
+      </div>
     )
   }
 }

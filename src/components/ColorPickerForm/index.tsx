@@ -3,17 +3,43 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator"
 import { ChromePicker, ColorChangeHandler } from "react-color"
 import Button from "@material-ui/core/Button"
 import { NewColor } from "components/PaletteFormNav"
+import {
+  createStyles,
+  WithStyles,
+  withStyles,
+} from "@material-ui/core/styles"
 
-interface Props {
+interface OwnProps {
   colors: NewColor[]
   isFullColor: boolean
   addNewColor: (e: React.FormEvent, newColor: NewColor) => void
 }
 
+const styles = createStyles({
+  root: {
+    "& .chrome-picker": {
+      width: "100% !important",
+      marginTop: "2rem",
+    },
+  },
+  addColor: {
+    width: "100%",
+    padding: "1rem",
+    marginTop: "1rem",
+    fontSize: "2rem",
+  },
+  colorNameInput: {
+    width: "100%",
+    height: 70,
+  },
+})
+
 interface State {
   currentColor: string
   newColorName: string
 }
+
+type Props = WithStyles<typeof styles> & OwnProps
 
 class ColorPickerForm extends React.Component<Props, State> {
   state: State = {
@@ -48,26 +74,21 @@ class ColorPickerForm extends React.Component<Props, State> {
   componentDidMount() {
     const { colors } = this.props
     ValidatorForm.addValidationRule("colorNameUnique", (name: string) => {
-      if (
-        colors.every(
-          (c) => c.name.toLowerCase() !== name.toLowerCase()
-        )
-      )
+      if (colors.every((c) => c.name.toLowerCase() !== name.toLowerCase()))
         return true
       return false
     })
     ValidatorForm.addValidationRule("colorUnique", () => {
-      if (colors.every((c) => c.color !== this.state.currentColor))
-        return true
+      if (colors.every((c) => c.color !== this.state.currentColor)) return true
       return false
     })
   }
 
   render() {
-    const { isFullColor } = this.props
+    const { isFullColor, classes } = this.props
     const { currentColor, newColorName } = this.state
     return (
-      <>
+      <div className={classes.root}>
         <ChromePicker
           color={currentColor}
           onChangeComplete={this.updateCurrentColor}
@@ -75,6 +96,10 @@ class ColorPickerForm extends React.Component<Props, State> {
         <ValidatorForm onSubmit={this.addNewColor}>
           <TextValidator
             name="newColorName"
+            className={classes.colorNameInput}
+            placeholder="Color Name"
+            variant="filled"
+            margin="normal"
             value={newColorName}
             onChange={this.handleChange}
             validators={["required", "colorNameUnique", "colorUnique"]}
@@ -89,6 +114,7 @@ class ColorPickerForm extends React.Component<Props, State> {
             type="submit"
             color="primary"
             disabled={isFullColor}
+            className={classes.addColor}
             style={{
               backgroundColor: isFullColor
                 ? "rgba(0, 0, 0, 0.12)"
@@ -98,9 +124,9 @@ class ColorPickerForm extends React.Component<Props, State> {
             {isFullColor ? "Palette Full" : "Add Color"}
           </Button>
         </ValidatorForm>
-      </>
+      </div>
     )
   }
 }
 
-export default ColorPickerForm
+export default withStyles(styles)(ColorPickerForm)
