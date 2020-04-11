@@ -1,25 +1,26 @@
 {
   "files": {
-    "main.css": "/color-picker-app/static/css/main.1778c3d2.chunk.css",
-    "main.js": "/color-picker-app/static/js/main.980a6ff6.chunk.js",
-    "main.js.map": "/color-picker-app/static/js/main.980a6ff6.chunk.js.map",
+    "main.css": "/color-picker-app/static/css/main.b76d22d2.chunk.css",
+    "main.js": "/color-picker-app/static/js/main.6e492d6c.chunk.js",
+    "main.js.map": "/color-picker-app/static/js/main.6e492d6c.chunk.js.map",
     "runtime-main.js": "/color-picker-app/static/js/runtime-main.a040adcd.js",
     "runtime-main.js.map": "/color-picker-app/static/js/runtime-main.a040adcd.js.map",
     "static/css/2.7095f003.chunk.css": "/color-picker-app/static/css/2.7095f003.chunk.css",
-    "static/js/2.f59362cf.chunk.js": "/color-picker-app/static/js/2.f59362cf.chunk.js",
-    "static/js/2.f59362cf.chunk.js.map": "/color-picker-app/static/js/2.f59362cf.chunk.js.map",
+    "static/js/2.3622d471.chunk.js": "/color-picker-app/static/js/2.3622d471.chunk.js",
+    "static/js/2.3622d471.chunk.js.map": "/color-picker-app/static/js/2.3622d471.chunk.js.map",
     "index.html": "/color-picker-app/index.html",
-    "precache-manifest.23aa772e3508abca9f71c4bec48c4e78.js": "/color-picker-app/precache-manifest.23aa772e3508abca9f71c4bec48c4e78.js",
+    "precache-manifest.718c7654be61195c9b056b37f43a7ab0.js": "/color-picker-app/precache-manifest.718c7654be61195c9b056b37f43a7ab0.js",
     "service-worker.js": "/color-picker-app/service-worker.js",
     "static/css/2.7095f003.chunk.css.map": "/color-picker-app/static/css/2.7095f003.chunk.css.map",
-    "static/css/main.1778c3d2.chunk.css.map": "/color-picker-app/static/css/main.1778c3d2.chunk.css.map",
-    "static/js/2.f59362cf.chunk.js.LICENSE.txt": "/color-picker-app/static/js/2.f59362cf.chunk.js.LICENSE.txt"
+    "static/css/main.b76d22d2.chunk.css.map": "/color-picker-app/static/css/main.b76d22d2.chunk.css.map",
+    "static/js/2.3622d471.chunk.js.LICENSE.txt": "/color-picker-app/static/js/2.3622d471.chunk.js.LICENSE.txt",
+    "static/media/bg.svg": "/color-picker-app/static/media/bg.660631b8.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.a040adcd.js",
     "static/css/2.7095f003.chunk.css",
-    "static/js/2.f59362cf.chunk.js",
-    "static/css/main.1778c3d2.chunk.css",
-    "static/js/main.980a6ff6.chunk.js"
+    "static/js/2.3622d471.chunk.js",
+    "static/css/main.b76d22d2.chunk.css",
+    "static/js/main.6e492d6c.chunk.js"
   ]
 }
