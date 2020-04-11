@@ -12,22 +12,43 @@ interface State {
 }
 
 class App extends React.Component<{}, State> {
-  state: State = {
-    palettes: seedColors,
+  constructor(props: {}) {
+    super(props)
+    let palettes: PaletteShape[]
+    const savedPalettes: PaletteShape[] = JSON.parse(
+      localStorage.getItem("palettes") || "[]"
+    )
+    if (savedPalettes.length > 0) palettes = savedPalettes
+    else palettes = seedColors
+    this.state = {
+      palettes,
+    }
   }
+
   findPalette(id: string) {
     return (
       this.state.palettes.find((palette) => palette.id === id) ||
       this.state.palettes[0]
     )
   }
+
   savePalette = (newPalette: PaletteShape) => {
-    this.setState((s) => ({
-      palettes: [...s.palettes, newPalette],
-    }))
+    this.setState(
+      (s) => ({
+        palettes: [...s.palettes, newPalette],
+      }),
+      () => {
+        this.syncLocalStorage()
+      }
+    )
   }
+
+  syncLocalStorage() {
+    localStorage.setItem("palettes", JSON.stringify(this.state.palettes))
+  }
+
   render() {
-    const { palettes } = this.state;
+    const { palettes } = this.state
     return (
       <Switch>
         <Route
@@ -41,7 +62,11 @@ class App extends React.Component<{}, State> {
           exact
           path="/palette/new"
           render={(routeProps) => (
-            <NewPaletteForm {...routeProps} savePalette={this.savePalette} palettes={palettes} />
+            <NewPaletteForm
+              {...routeProps}
+              savePalette={this.savePalette}
+              palettes={palettes}
+            />
           )}
         />
         <Route
