@@ -41,6 +41,7 @@ const styles = createStyles({
 
 interface OwnProps {
   palettes: PaletteShape[]
+  deletePalette: (id: string) => void
 }
 
 type Props = WithStyles<typeof styles> & RouteChildrenProps & OwnProps
@@ -50,7 +51,7 @@ class PaletteList extends React.Component<Props> {
     this.props.history.push(`/palette/${id}`)
   }
   render() {
-    const { classes, palettes } = this.props
+    const { classes, palettes, deletePalette } = this.props
     return (
       <div className={classes.root}>
         <div className={classes.container}>
@@ -65,6 +66,7 @@ class PaletteList extends React.Component<Props> {
                 name={p.paletteName}
                 emoji={p.emoji}
                 colors={p.colors}
+                deletePalette={() => deletePalette(p.id)}
                 handleClick={() => this.goToPalette(p.id)}
               />
             ))}
