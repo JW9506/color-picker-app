@@ -2,11 +2,12 @@ import React from "react"
 import { createStyles, WithStyles, withStyles } from "@material-ui/core/styles"
 import DeleteIcon from "@material-ui/icons/Delete"
 import { SortableElement } from "react-sortable-hoc"
+import { querySizeDown } from "utils/styleMediaQuery"
 
 const styles = createStyles({
   root: {
-    height: "20%",
-    width: "25%",
+    width: "20%",
+    height: "25%",
     margin: "0 auto",
     display: "inline-block",
     position: "relative",
@@ -15,6 +16,18 @@ const styles = createStyles({
     "&:hover svg": {
       color: "white",
       transform: "scale(1.2)",
+    },
+    [querySizeDown("lg")]: {
+      width: "25%",
+      height: "20%",
+    },
+    [querySizeDown("md")]: {
+      width: "50%",
+      height: "10%",
+    },
+    [querySizeDown("sm")]: {
+      width: "100%",
+      height: "5%",
     },
   },
   boxContent: {

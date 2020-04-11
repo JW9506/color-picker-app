@@ -16,6 +16,7 @@ import clsx from "clsx"
 import Button from "@material-ui/core/Button"
 import { PaletteShape } from "seedColors"
 import PaletteMetaForm from "components/PaletteMetaForm"
+import { querySizeDown } from "utils/styleMediaQuery"
 
 export const drawerWidth = 400
 const styles = (theme: Theme) =>
@@ -52,9 +53,16 @@ const styles = (theme: Theme) =>
       "& a": {
         textDecoration: "none",
       },
+      [querySizeDown("xs")]: {
+        marginRight: "0.5rem",
+      },
     },
     button: {
       margin: "0 0.5rem",
+      [querySizeDown("xs")]: {
+        margin: 0,
+        padding: "0.4rem",
+      },
     },
   })
 
@@ -120,8 +128,12 @@ class PaletteFormNav extends React.Component<Props, State> {
             </Typography>
           </Toolbar>
           <div className={classes.navBtns}>
-            <Link to={`${process.env.PUBLIC_URL}/`} className={classes.button}>
-              <Button variant="contained" color="secondary">
+            <Link to={`${process.env.PUBLIC_URL}/`}>
+              <Button
+                variant="contained"
+                color="secondary"
+                className={classes.button}
+              >
                 Go Back
               </Button>
             </Link>

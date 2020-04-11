@@ -16,12 +16,18 @@
       text-decoration: none;
       color: black;
     }
+    @include xs {
+      display: none;
+    }
   }
   .slider-container {
     .slider {
       width: 340px;
       margin: 0 10px;
       display: inline-block;
+      @include sm {
+        width: 150px;
+      }
     }
 
     .rc-slider-track {
