@@ -5,8 +5,18 @@ import { createStyles, withStyles, WithStyles } from "@material-ui/styles"
 import MiniPalette from "components/MiniPalette"
 import { querySizeDown } from "utils/styleMediaQuery"
 import bg from "utils/bg.svg"
+import { TransitionGroup, CSSTransition } from "react-transition-group"
 
 const styles = createStyles({
+  "@global": {
+    ".fade-exit": {
+      opacity: 1,
+    },
+    ".fade-exit-active": {
+      opacity: 0,
+      transition: "opacity 0.5s ease-out"
+    },
+  },
   root: {
     backgroundColor: "#5f77aa",
     backgroundImage: `url(${bg})`,
@@ -80,20 +90,23 @@ class PaletteList extends React.Component<Props> {
         <div className={classes.container}>
           <nav className={classes.nav}>
             <h1>React Colors</h1>
-            <Link to={`${process.env.PUBLIC_URL}/palette/new`}>Create Palette</Link>
+            <Link to={`${process.env.PUBLIC_URL}/palette/new`}>
+              Create Palette
+            </Link>
           </nav>
-          <div className={classes.palette}>
+          <TransitionGroup className={classes.palette}>
             {palettes.map((p) => (
-              <MiniPalette
-                key={Math.random()}
-                name={p.paletteName}
-                emoji={p.emoji}
-                colors={p.colors}
-                deletePalette={() => deletePalette(p.id)}
-                handleClick={() => this.goToPalette(p.id)}
-              />
+              <CSSTransition key={p.id} classNames="fade" timeout={500}>
+                <MiniPalette
+                  name={p.paletteName}
+                  emoji={p.emoji}
+                  colors={p.colors}
+                  deletePalette={() => deletePalette(p.id)}
+                  handleClick={() => this.goToPalette(p.id)}
+                />
+              </CSSTransition>
             ))}
-          </div>
+          </TransitionGroup>
         </div>
       </div>
     )
