@@ -129,7 +129,7 @@ class NewPaletteForm extends React.Component<Props, State> {
       colors: this.state.colors,
     }
     this.props.savePalette(newPalette)
-    this.props.history.push("/")
+    this.props.history.push(`${process.env.PUBLIC_URL}/`)
   }
 
   handleDelete = (colorName: string) => {

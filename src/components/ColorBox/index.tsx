@@ -66,7 +66,7 @@ class ColorBox extends React.Component<Props, State> {
           </div>
           {paletteId && (
             <Link
-              to={`/palette/${paletteId}/${id}`}
+              to={`${process.env.PUBLIC_URL}/palette/${paletteId}/${id}`}
               onClick={(e) => e.stopPropagation()}
             >
               <span className={clsx("see-more", isLightColor && "dark-text")}>

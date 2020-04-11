@@ -46,7 +46,7 @@ class Navbar extends React.Component<Props, State> {
     return (
       <header className="Navbar">
         <div className="logo">
-          <Link to="/">reactcolorpicker</Link>
+          <Link to={`${process.env.PUBLIC_URL}/`}>reactcolorpicker</Link>
         </div>
         {level && changeLevel && (
           <div className="slider-container">

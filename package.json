@@ -1,5 +1,6 @@
 {
   "name": "react-app",
+  "homepage": "http://JW9506.github.io/color-picker-app",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -26,6 +27,7 @@
     "chroma-js": "^2.1.0",
     "clsx": "^1.1.0",
     "emoji-mart": "^3.0.0",
+    "gh-pages": "^2.2.0",
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "rc-slider": "^9.2.4",
@@ -45,7 +47,9 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app",

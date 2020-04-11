@@ -37,7 +37,7 @@ const SingleColorPalette: React.FC<Props> = ({
       <div className="Palette-colors">
         {colorBoxes}
         <div className="go-back ColorBox">
-          <Link className="back-button" to={`/palette/${id}`}>
+          <Link className="back-button" to={`${process.env.PUBLIC_URL}/palette/${id}`}>
             Go Back
           </Link>
         </div>

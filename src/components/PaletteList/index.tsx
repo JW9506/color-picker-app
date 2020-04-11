@@ -48,7 +48,7 @@ type Props = WithStyles<typeof styles> & RouteChildrenProps & OwnProps
 
 class PaletteList extends React.Component<Props> {
   goToPalette = (id: string) => {
-    this.props.history.push(`/palette/${id}`)
+    this.props.history.push(`${process.env.PUBLIC_URL}/palette/${id}`)
   }
   render() {
     const { classes, palettes, deletePalette } = this.props
@@ -57,7 +57,7 @@ class PaletteList extends React.Component<Props> {
         <div className={classes.container}>
           <nav className={classes.nav}>
             <h1>React Colors</h1>
-            <Link to="/palette/new">Create Palette</Link>
+            <Link to={`${process.env.PUBLIC_URL}/palette/new`}>Create Palette</Link>
           </nav>
           <div className={classes.palette}>
             {palettes.map((p) => (

@@ -120,7 +120,7 @@ class PaletteFormNav extends React.Component<Props, State> {
             </Typography>
           </Toolbar>
           <div className={classes.navBtns}>
-            <Link to="/" className={classes.button}>
+            <Link to={`${process.env.PUBLIC_URL}/`} className={classes.button}>
               <Button variant="contained" color="secondary">
                 Go Back
               </Button>

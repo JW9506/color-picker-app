@@ -60,7 +60,7 @@ class App extends React.Component<{}, State> {
       <Switch>
         <Route
           exact
-          path="/"
+          path={`${process.env.PUBLIC_URL}/`}
           render={(routeProps: RouteComponentProps<{ id: string }>) => (
             <PaletteList
               palettes={palettes}
@@ -71,7 +71,7 @@ class App extends React.Component<{}, State> {
         />
         <Route
           exact
-          path="/palette/new"
+          path={`${process.env.PUBLIC_URL}/palette/new`}
           render={(routeProps) => (
             <NewPaletteForm
               {...routeProps}
@@ -82,7 +82,7 @@ class App extends React.Component<{}, State> {
         />
         <Route
           exact
-          path="/palette/:id"
+          path={`${process.env.PUBLIC_URL}/palette/:id`}
           render={(routeProps: RouteComponentProps<{ id: string }>) => (
             <Palette
               {...generatePalette(this.findPalette(routeProps.match.params.id))}
@@ -91,7 +91,7 @@ class App extends React.Component<{}, State> {
         />
         <Route
           exact
-          path="/palette/:paletteId/:colorId"
+          path={`${process.env.PUBLIC_URL}/palette/:paletteId/:colorId`}
           render={(
             routeProps: RouteComponentProps<{
               paletteId: string
@@ -99,7 +99,7 @@ class App extends React.Component<{}, State> {
             }>
           ) => (
             <SingleCOlorPalette
-              colorId={routeProps.match!.params.colorId}
+              colorId={routeProps.match.params.colorId}
               {...generatePalette(
                 this.findPalette(routeProps.match.params.paletteId)
               )}
