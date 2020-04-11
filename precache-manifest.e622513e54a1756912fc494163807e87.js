@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a9c1ea47c84ca3622fe32433d234e057",
+    "revision": "35d23b37407a71ca38601fa7e18af415",
     "url": "/color-picker-app/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/color-picker-app/static/css/2.7095f003.chunk.css"
   },
   {
-    "revision": "bb323610c5f036bf43c4",
+    "revision": "ef8ef138addcad00d242",
     "url": "/color-picker-app/static/css/main.1778c3d2.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/color-picker-app/static/js/2.f59362cf.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "bb323610c5f036bf43c4",
-    "url": "/color-picker-app/static/js/main.1bacd34b.chunk.js"
+    "revision": "ef8ef138addcad00d242",
+    "url": "/color-picker-app/static/js/main.086b292b.chunk.js"
   },
   {
     "revision": "4d5c8855858f453a589d",
