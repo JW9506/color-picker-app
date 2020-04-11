@@ -2,10 +2,8 @@ import React from "react"
 import { RouteComponentProps } from "react-router-dom"
 import { PaletteShape } from "seedColors"
 import clsx from "clsx"
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator"
 import DraggableColorList from "components/DraggableColorList"
-import PaletteFormNav from "components/PaletteFormNav"
-import { ChromePicker, ColorChangeHandler } from "react-color"
+import PaletteFormNav, { drawerWidth } from "components/PaletteFormNav"
 import { SortEndHandler, SortEventWithTag, SortEvent } from "react-sortable-hoc"
 import arrayMove from "array-move"
 import {
@@ -21,8 +19,8 @@ import IconButton from "@material-ui/core/IconButton"
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
 import ChevronRightIcon from "@material-ui/icons/ChevronRight"
 import Button from "@material-ui/core/Button"
+import ColorPickerForm from "components/ColorPickerForm"
 
-const drawerWidth = 400
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -102,28 +100,10 @@ class NewPaletteForm extends React.Component<Props, State> {
     this.setState({ open: false })
   }
 
-  updateCurrentColor: ColorChangeHandler = (result) => {
-    this.setState({ currentColor: result.hex })
-  }
-
-  addNewColor = (e: React.FormEvent) => {
+  addNewColor = (e: React.FormEvent, newColor: NewColor) => {
     e.preventDefault()
-    const { newColorName, currentColor } = this.state
-    const newColor = {
-      color: currentColor,
-      name: newColorName,
-    }
     this.setState((s) => ({
       colors: [...s.colors, newColor],
-      newColorName: "",
-    }))
-  }
-
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    this.setState((s) => ({
-      ...s,
-      [name]: value,
     }))
   }
 
@@ -168,43 +148,9 @@ class NewPaletteForm extends React.Component<Props, State> {
     }))
   }
 
-  componentDidMount() {
-    ValidatorForm.addValidationRule("colorNameUnique", (name: string) => {
-      if (
-        this.state.colors.every(
-          (c) => c.name.toLowerCase() !== name.toLowerCase()
-        )
-      )
-        return true
-      return false
-    })
-    ValidatorForm.addValidationRule("colorUnique", () => {
-      if (this.state.colors.every((c) => c.color !== this.state.currentColor))
-        return true
-      return false
-    })
-    ValidatorForm.addValidationRule(
-      "paletteNameUnique",
-      (paletteName: string) => {
-        if (
-          this.props.palettes.every(
-            (p) => p.paletteName.toLowerCase() !== paletteName.toLowerCase()
-          )
-        )
-          return true
-        return false
-  }
-    )
-  }
-
   render() {
     const { classes, theme, maxColors, palettes } = this.props
-    const {
-      open,
-      currentColor,
-      colors,
-      newColorName,
-    } = this.state
+    const { open, currentColor, colors, newColorName } = this.state
     const isFullColor = maxColors <= colors.length
     return (
       <div className={classes.root}>
@@ -251,36 +197,11 @@ class NewPaletteForm extends React.Component<Props, State> {
               Random Color
             </Button>
           </div>
-          <ChromePicker
-            color={currentColor}
-            onChangeComplete={this.updateCurrentColor}
+          <ColorPickerForm
+            colors={colors}
+            isFullColor={isFullColor}
+            addNewColor={this.addNewColor}
           />
-          <ValidatorForm onSubmit={this.addNewColor}>
-            <TextValidator
-              name="newColorName"
-              value={newColorName}
-              onChange={this.handleChange}
-              validators={["required", "colorNameUnique", "colorUnique"]}
-              errorMessages={[
-                "This field is required",
-                "This color name has been used",
-                "This color has been used",
-              ]}
-            />
-            <Button
-              variant="contained"
-              type="submit"
-              color="primary"
-              disabled={isFullColor}
-              style={{
-                backgroundColor: isFullColor
-                  ? "rgba(0, 0, 0, 0.12)"
-                  : currentColor,
-              }}
-            >
-              {isFullColor ? "Palette Full" : "Add Color"}
-            </Button>
-          </ValidatorForm>
         </Drawer>
         <main
           className={clsx(classes.content, {

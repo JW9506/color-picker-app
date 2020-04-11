@@ -17,7 +17,7 @@ import Button from "@material-ui/core/Button"
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator"
 import { PaletteShape } from "seedColors"
 
-const drawerWidth = 400
+export const drawerWidth = 400
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -90,6 +90,7 @@ class PaletteFormNav extends React.Component<Props, State> {
       }
     )
   }
+
   render() {
     const { classes, handleDrawerOpen, savePalette, open } = this.props
     const { newPaletteName } = this.state
