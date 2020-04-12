@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/color-picker-app/static/css/main.5a0b2810.chunk.css",
-    "main.js": "/color-picker-app/static/js/main.b9cbdcfc.chunk.js",
-    "main.js.map": "/color-picker-app/static/js/main.b9cbdcfc.chunk.js.map",
+    "main.js": "/color-picker-app/static/js/main.78c88b9e.chunk.js",
+    "main.js.map": "/color-picker-app/static/js/main.78c88b9e.chunk.js.map",
     "runtime-main.js": "/color-picker-app/static/js/runtime-main.a040adcd.js",
     "runtime-main.js.map": "/color-picker-app/static/js/runtime-main.a040adcd.js.map",
     "static/css/2.7095f003.chunk.css": "/color-picker-app/static/css/2.7095f003.chunk.css",
     "static/js/2.4c186a2a.chunk.js": "/color-picker-app/static/js/2.4c186a2a.chunk.js",
     "static/js/2.4c186a2a.chunk.js.map": "/color-picker-app/static/js/2.4c186a2a.chunk.js.map",
     "index.html": "/color-picker-app/index.html",
-    "precache-manifest.6ff6d791d1f0e4d9360e7c172dd4e873.js": "/color-picker-app/precache-manifest.6ff6d791d1f0e4d9360e7c172dd4e873.js",
+    "precache-manifest.838a7dbaf468504b5c3ec35c75171f43.js": "/color-picker-app/precache-manifest.838a7dbaf468504b5c3ec35c75171f43.js",
     "service-worker.js": "/color-picker-app/service-worker.js",
     "static/css/2.7095f003.chunk.css.map": "/color-picker-app/static/css/2.7095f003.chunk.css.map",
     "static/css/main.5a0b2810.chunk.css.map": "/color-picker-app/static/css/main.5a0b2810.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.7095f003.chunk.css",
     "static/js/2.4c186a2a.chunk.js",
     "static/css/main.5a0b2810.chunk.css",
-    "static/js/main.b9cbdcfc.chunk.js"
+    "static/js/main.78c88b9e.chunk.js"
   ]
 }
