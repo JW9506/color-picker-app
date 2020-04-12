@@ -122,6 +122,11 @@ class PaletteList extends React.Component<Props, State> {
     this.closeDialog()
   }
 
+  handleDialogKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter")
+      this.confirmDeletePalette()
+  }
+
   goToPalette = (paletteId: string) => {
     this.props.history.push(`${process.env.PUBLIC_URL}/palette/${paletteId}`)
   }
@@ -157,6 +162,7 @@ class PaletteList extends React.Component<Props, State> {
           open={openDeleteDialog}
           aria-labelledby="delete-dialog-title"
           onClose={this.closeDialog}
+          onKeyPress={this.handleDialogKeyPress}
         >
           <DialogTitle id="delete-dialog-title">
             Delete This Palette?
