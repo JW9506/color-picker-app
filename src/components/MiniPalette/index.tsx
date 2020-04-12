@@ -65,7 +65,7 @@ interface OwnProps {
   emoji: string
   colors: PaletteShape["colors"]
   handleClick: () => void
-  deletePalette: () => void
+  togglePaletteDel: () => void
 }
 
 type Props = WithStyles<typeof styles> & OwnProps
@@ -76,7 +76,7 @@ const MiniPalette: React.FC<Props> = ({
   emoji,
   colors,
   handleClick,
-  deletePalette: _deletePalette,
+  togglePaletteDel: _togglePaletteDel,
 }) => {
   const miniColorBoxes = colors.map((c) => (
     <div
@@ -86,14 +86,14 @@ const MiniPalette: React.FC<Props> = ({
     ></div>
   ))
 
-  const deletePalette = (e: React.MouseEvent) => {
+  const togglePaletteDel = (e: React.MouseEvent) => {
     e.stopPropagation()
-    _deletePalette()
+    _togglePaletteDel()
   }
 
   return (
     <div className={classes.root} onClick={handleClick}>
-      <DeleteIcon className={classes.deleteIcon} onClick={deletePalette} />
+      <DeleteIcon className={classes.deleteIcon} onClick={togglePaletteDel} />
       <div className={classes.colors}>{miniColorBoxes}</div>
       <h5 className={classes.title}>
         {name} <span className={classes.emoji}>{emoji}</span>

@@ -6,6 +6,17 @@ import MiniPalette from "components/MiniPalette"
 import { querySizeDown } from "utils/styleMediaQuery"
 import bg from "utils/bg.svg"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
+import Dialog from "@material-ui/core/Dialog"
+import DialogTitle from "@material-ui/core/DialogTitle"
+import List from "@material-ui/core/List"
+import ListItemAvatar from "@material-ui/core/ListItemAvatar"
+import Avatar from "@material-ui/core/Avatar"
+import ListItemText from "@material-ui/core/ListItemText"
+import ListItem from "@material-ui/core/ListItem"
+import blue from "@material-ui/core/colors/blue"
+import red from "@material-ui/core/colors/red"
+import CheckRounded from "@material-ui/icons/CheckRounded"
+import CancelRounded from "@material-ui/icons/CancelRounded"
 
 const styles = createStyles({
   "@global": {
@@ -14,7 +25,7 @@ const styles = createStyles({
     },
     ".fade-exit-active": {
       opacity: 0,
-      transition: "opacity 0.5s ease-out"
+      transition: "opacity 0.5s ease-out",
     },
   },
   root: {
@@ -79,12 +90,45 @@ interface OwnProps {
 
 type Props = WithStyles<typeof styles> & RouteChildrenProps & OwnProps
 
-class PaletteList extends React.Component<Props> {
+interface State {
+  openDeleteDialog: boolean
+  currentPaletteToDel: string
+}
+
+class PaletteList extends React.Component<Props, State> {
+  state: State = {
+    openDeleteDialog: false,
+    currentPaletteToDel: "",
+  }
+
+  openDialog = (paletteId: string) => {
+    this.setState({
+      openDeleteDialog: true,
+      currentPaletteToDel: paletteId,
+    })
+  }
+
+  closeDialog = () => {
+    this.setState({
+      openDeleteDialog: false,
+      currentPaletteToDel: "",
+    })
+  }
+
+  confirmDeletePalette = () => {
+    const { deletePalette } = this.props
+    const { currentPaletteToDel } = this.state
+    deletePalette(currentPaletteToDel)
+    this.closeDialog()
+  }
+
   goToPalette = (id: string) => {
     this.props.history.push(`${process.env.PUBLIC_URL}/palette/${id}`)
   }
+
   render() {
-    const { classes, palettes, deletePalette } = this.props
+    const { classes, palettes } = this.props
+    const { openDeleteDialog } = this.state
     return (
       <div className={classes.root}>
         <div className={classes.container}>
@@ -101,13 +145,40 @@ class PaletteList extends React.Component<Props> {
                   name={p.paletteName}
                   emoji={p.emoji}
                   colors={p.colors}
-                  deletePalette={() => deletePalette(p.id)}
+                  togglePaletteDel={() => this.openDialog(p.id)}
                   handleClick={() => this.goToPalette(p.id)}
                 />
               </CSSTransition>
             ))}
           </TransitionGroup>
         </div>
+        <Dialog
+          open={openDeleteDialog}
+          aria-labelledby="delete-dialog-title"
+          onClose={this.closeDialog}
+        >
+          <DialogTitle id="delete-dialog-title">
+            Delete This Palette?
+          </DialogTitle>
+          <List>
+            <ListItem button onClick={this.confirmDeletePalette}>
+              <ListItemAvatar>
+                <Avatar style={{ backgroundColor: blue[600] }}>
+                  <CheckRounded />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText>Delete</ListItemText>
+            </ListItem>
+            <ListItem button onClick={this.closeDialog}>
+              <ListItemAvatar>
+                <Avatar style={{ backgroundColor: red[600] }}>
+                  <CancelRounded />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText>Cancel</ListItemText>
+            </ListItem>
+          </List>
+        </Dialog>
       </div>
     )
   }
