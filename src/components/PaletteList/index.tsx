@@ -122,8 +122,8 @@ class PaletteList extends React.Component<Props, State> {
     this.closeDialog()
   }
 
-  goToPalette = (id: string) => {
-    this.props.history.push(`${process.env.PUBLIC_URL}/palette/${id}`)
+  goToPalette = (paletteId: string) => {
+    this.props.history.push(`${process.env.PUBLIC_URL}/palette/${paletteId}`)
   }
 
   render() {
@@ -145,8 +145,9 @@ class PaletteList extends React.Component<Props, State> {
                   name={p.paletteName}
                   emoji={p.emoji}
                   colors={p.colors}
-                  togglePaletteDel={() => this.openDialog(p.id)}
-                  handleClick={() => this.goToPalette(p.id)}
+                  id={p.id}
+                  togglePaletteDel={this.openDialog}
+                  handleClick={this.goToPalette}
                 />
               </CSSTransition>
             ))}

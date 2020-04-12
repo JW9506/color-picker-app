@@ -64,8 +64,9 @@ interface OwnProps {
   name: string
   emoji: string
   colors: PaletteShape["colors"]
-  handleClick: () => void
-  togglePaletteDel: () => void
+  id: string
+  handleClick: (paletteId: string) => void
+  togglePaletteDel: (paletteId: string) => void
 }
 
 type Props = WithStyles<typeof styles> & OwnProps
@@ -75,7 +76,8 @@ const MiniPalette: React.FC<Props> = ({
   name,
   emoji,
   colors,
-  handleClick,
+  id,
+  handleClick: _handleClick,
   togglePaletteDel: _togglePaletteDel,
 }) => {
   const miniColorBoxes = colors.map((c) => (
@@ -88,7 +90,11 @@ const MiniPalette: React.FC<Props> = ({
 
   const togglePaletteDel = (e: React.MouseEvent) => {
     e.stopPropagation()
-    _togglePaletteDel()
+    _togglePaletteDel(id)
+  }
+
+  const handleClick = () => {
+    _handleClick(id)
   }
 
   return (
@@ -102,4 +108,4 @@ const MiniPalette: React.FC<Props> = ({
   )
 }
 
-export default withStyles(styles)(MiniPalette)
+export default React.memo(withStyles(styles)(MiniPalette))
