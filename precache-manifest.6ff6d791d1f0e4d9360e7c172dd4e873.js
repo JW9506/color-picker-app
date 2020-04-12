@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4f3e6bd05ace2683afa24d1e85f15837",
+    "revision": "b8972c632bd15c95b0613e8bfa9a3fd6",
     "url": "/color-picker-app/index.html"
   },
   {
-    "revision": "f276d253e47438a17deb",
+    "revision": "d0d1306b28e291a5567a",
     "url": "/color-picker-app/static/css/2.7095f003.chunk.css"
   },
   {
-    "revision": "05cff0a84f6b01f0c79d",
-    "url": "/color-picker-app/static/css/main.b76d22d2.chunk.css"
+    "revision": "2718b3b35e53ccf4d036",
+    "url": "/color-picker-app/static/css/main.5a0b2810.chunk.css"
   },
   {
-    "revision": "f276d253e47438a17deb",
-    "url": "/color-picker-app/static/js/2.3622d471.chunk.js"
+    "revision": "d0d1306b28e291a5567a",
+    "url": "/color-picker-app/static/js/2.4c186a2a.chunk.js"
   },
   {
     "revision": "fe2f19c5d5965d51615a596cf8d07fe9",
-    "url": "/color-picker-app/static/js/2.3622d471.chunk.js.LICENSE.txt"
+    "url": "/color-picker-app/static/js/2.4c186a2a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "05cff0a84f6b01f0c79d",
-    "url": "/color-picker-app/static/js/main.6e492d6c.chunk.js"
+    "revision": "2718b3b35e53ccf4d036",
+    "url": "/color-picker-app/static/js/main.b9cbdcfc.chunk.js"
   },
   {
     "revision": "4d5c8855858f453a589d",
